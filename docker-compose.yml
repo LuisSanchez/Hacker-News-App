@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  hacker-news-server:
+    image: hacker-news-server
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3500:3500
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo
+    ports:
+        - 27017:27017
