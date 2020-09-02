@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  hacker-news-client:
+    image: hacker-news-client
+    build: .
+    ports:
+      - 4002
