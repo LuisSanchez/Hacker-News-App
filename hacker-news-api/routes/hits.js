@@ -1,18 +1,14 @@
-const express = require('express');
-const router = express.Router();
-const Hit = require('../models/Hit');
+const router = require('express').Router();
+const { hitsService } = require('../services/hits');
 
 // get all hits
 router.get('/', async (req, res) => {
     try {
-        console.log('proceding to get hits...');
-        const hits = await Hit
-            .find()
-            .sort({ 'created_at': -1 })
-            .limit(5);
-        res.json(hits);
+        console.log('proceeding to get hits...');
+        const hits = await hitsService.getAllHits();            
+        res.status(200).json(hits);
     } catch (error) {
-        res.json({
+        res.status(404).json({
             message: error
         });
     }
@@ -21,11 +17,11 @@ router.get('/', async (req, res) => {
 // get a hit by id
 router.get('/:id', async (req, res) => {
     try {
-        console.log('proceding to get 1 hit...');
-        const hit = await Hit.findById(req.params.id);
+        console.log('proceeding to get 1 hit...');
+        const hit = await hitsService.getHitById(req.params.id);
         res.json(hit);
     } catch (error) {
-        res.json({
+        res.status(404).json({
             message: error
         });
     }
@@ -35,12 +31,10 @@ router.get('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         console.log('proceding to detele a hit...');
-        const deletedPost = await Post.remove({
-            _id: req.params.id
-        });
+        const deletedPost = await hitsService.removeHitById(req.param.id);
         res.json(deletedPost);
     } catch (err) {
-        res.json({
+        res.status(404).json({
             message: err
         });
     }

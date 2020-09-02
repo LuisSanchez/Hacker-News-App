@@ -23,7 +23,7 @@ describe("Integration test with mongo" , () => {
             .expect('Content-Type', /json/)
             .expect(200).then(response => {
                 expect(Array.isArray(response.body));
-                expect(response.body.length).to.equal(5);
+                expect(response.body.length).to.equal(20);
             });
     });
 });

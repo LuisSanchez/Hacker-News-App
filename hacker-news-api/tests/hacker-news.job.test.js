@@ -1,5 +1,5 @@
 const { assert} = require("chai");
-const { job } = require('../hacker-news-api/jobs/hacker-news.job');
+const { job } = require('../jobs/hacker-news');
 const mongoose = require("mongoose");
 require('dotenv').config({ path: './config/.env' });
 

@@ -1,6 +1,6 @@
 const middleware = require('./middleware/default');
 const conn = require('./db/connection');
-const { job } = require('./hacker-news-api/jobs/hacker-news.job');
+const { job } = require('./jobs/hacker-news');
 
 // Makes the conn to the mongodb
 conn.startConnection();

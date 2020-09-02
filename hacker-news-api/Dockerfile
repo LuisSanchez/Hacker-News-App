@@ -7,5 +7,5 @@ COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 # Production
 RUN npm ci --only=production
 COPY . .
-EXPOSE 3500
+EXPOSE 4000
 CMD ["npm", "start"]

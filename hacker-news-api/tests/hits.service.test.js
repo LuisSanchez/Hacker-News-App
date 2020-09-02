@@ -1,7 +1,7 @@
 const Hit = require('../db/models/hits.model');
 const {expect} = require("chai")
 const sinon = require("sinon")
-const { hitsService } = require('../services/hits.service');
+const { hitsService } = require('../services/hits');
 
 describe('Get hit by id', () => {
     it("Should retrieve hit by an given id" , async () => {

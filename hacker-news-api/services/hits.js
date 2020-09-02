@@ -7,7 +7,7 @@ const service = {
             .sort({
                 'created_at': -1
             })
-            .limit(5);
+            .limit(20);
 
         return hits;
     },

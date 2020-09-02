@@ -1,5 +1,5 @@
 const assert = require('assert');
-const hackerNewsRouter = require('../hacker-news-api/routers/hacker-news.router');
+const hackerNewsRouter = require('../routes/hacker-news');
 
 describe('Get news from hacker news api', () => {
     it('Should return ok', () => {

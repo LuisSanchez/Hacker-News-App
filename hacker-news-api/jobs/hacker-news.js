@@ -1,5 +1,5 @@
-const hackerNews = require('../routers/hacker-news.router');
-const { hitsService } = require('../../services/hits.service');
+const hackerNews = require('../routes/hacker-news');
+const { hitsService } = require('../services/hits');
 
 const job = {
     /**
