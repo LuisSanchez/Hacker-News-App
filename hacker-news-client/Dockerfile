@@ -1,19 +1,17 @@
-# pull official base image
-FROM node:12.18-alpine
+FROM node:12.18-alpine AS builder
 
 ENV PORT 4002
-# set working directory
-WORKDIR /usr/src/app
 
-# install app dependencies
+WORKDIR /app
 COPY package*.json ./
-
-RUN npm ci --only=production
-
-# add app
+RUN npm ci
 COPY . .
+RUN npm run build
 
-EXPOSE 4002
 
-# start app
-CMD ["npm", "start"]
+FROM node:12.18-alpine
+RUN yarn global add serve
+WORKDIR /app
+COPY --from=builder /app/build .
+EXPOSE 80
+CMD ["serve", "-p", "80", "-s", "."]
