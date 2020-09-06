@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  hacker-news-api:
+    container_name: nodejs-api
+    image: hacker-news-api
+    build: ./hacker-news-api
+    environment:
+      NODE_ENV: development
+    ports:
+      - 4000:4000
+    command: ["node", "--inspect=0.0.0.0:9229", "index.js"]
+    depends_on:
+      - mongodb
+      - hacker-news-client
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    ports:
+      - 27017:27017
+  hacker-news-client:
+    build: ./hacker-news-client
+    container_name: react-client
+    image: hacker-news-client
+    ports:
+      - 4002:80

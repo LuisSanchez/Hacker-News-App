@@ -1,32 +1,45 @@
 const Hit = require("../db/models/hits.model");
 
 const service = {
-    getAllHits: async function () {
-        let hits = await Hit
-            .find()
-            .sort({
-                'created_at': -1
-            })
-            .limit(20);
+  /**
+   * Fetchs the Hits from the database by the given limit
+   * @param {Number} limit 5 < limit < 20
+   */
+  getAllHits: async function (limit) {
+    let hits = await Hit.find()
+      .sort({
+        created_at: -1,
+      })
+      .limit(limit);
 
-        return hits;
-    },
+    return hits;
+  },
 
-    getHitById: async function (id) {
-        return await Hit.findById(id);
-    },
+  /**
+   * Gets the Hit by the given id
+   * @param {Hit._id} id
+   */
+  getHitById: async function (id) {
+    return await Hit.findById(id);
+  },
 
-    removeHitById: async function (id) {
-        return await Hit.remove({
-            _id: id
-        });
-    },
+  /**
+   * Removes the Hit by the given id
+   * @param {Hit._id} id
+   */
+  removeHitById: async function (id) {
+    return await Hit.remove({
+      _id: id,
+    });
+  },
 
-    createHits: async function(hits) {
-        return await Hit.create(hits).then(x => {
-            console.log(`hits added to db ${hits.length}`);
-        });
-    }
-}
+  /**
+   * Persist Hit(s) on the database
+   * @param {Hits} hits
+   */
+  createHits: async function (hits) {
+    return await Hit.create(hits);
+  },
+};
 
 module.exports.hitsService = service;
