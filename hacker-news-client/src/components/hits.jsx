@@ -27,17 +27,15 @@ class Hits extends React.Component {
     fetch(`http://localhost:4000/api/hits?limit=${limit}`)
       .then((response) => response.json())
       .then((hits) => {
-        if (this.state.hits.length === 0) {
-          // Checks if the new request brings items that were deleted
-          const deletedHits = this.state.deletedHits.slice();
-          let hitsNotPrevDeleted = [];
-          for (let i = 0; i < hits.length; i++) {
-            if (!deletedHits.some((x) => x._id === hits[i]._id))
-              hitsNotPrevDeleted.push(hits[i]);
-          }
-
-          this.setState({ hits: hitsNotPrevDeleted });
+        // Checks if the new request brings items that were deleted
+        const deletedHits = this.state.deletedHits.slice();
+        let hitsNotPrevDeleted = [];
+        for (let i = 0; i < hits.length; i++) {
+          if (!deletedHits.some((x) => x._id === hits[i]._id))
+            hitsNotPrevDeleted.push(hits[i]);
         }
+
+        this.setState({ hits: hitsNotPrevDeleted });
 
         // Uses local storage to keep the state 'permanent'
         const prevState = this.setState;
